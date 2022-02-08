@@ -5,7 +5,7 @@ from .models import Page
 
 class PageAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ('title', 'slug', 'is_in_navigation')
-    prepopulated_fiedls = {"slug": ("title", )}
+    prepopulated_fields = {"slug": ("title", )}
 
 # Register your models here.
 admin.site.register(Page, PageAdmin)
