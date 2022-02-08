@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+    <section class="hero">
+        <h1>Hi, my name is David</h1>
+    </section> 
+
+    <section class="page">
+
+        <figure>
+            <img src={% static 'david.jpg' %}>
+
+            <figcaption>
+                <p>{% lorem 1 b random %}</p>
+                
+            </figcaption>
+        </figure>
+
+    </section>
+{% endblock %}
