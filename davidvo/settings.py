@@ -16,7 +16,10 @@ import django_heroku
 
 env = environ.Env(
     DEBUG=(bool, False),
-    SECRET_KEY=(str, "")
+    SECRET_KEY=(str, ""),
+    AWS_KEY=(str, ""),
+    AWS_SECRET=(str, ""),
+    AWS_BUCKET=(str, "")
 )
 
 environ.Env.read_env()
@@ -49,7 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tinymce',
-    'adminsortable2'
+    'adminsortable2',
+    'django_s3_storage'
 ]
 
 MIDDLEWARE = [
@@ -136,6 +140,15 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = '/media/'
+
+DEFAULT_FILE_STORAGE = "django_s3_storage.storage.S3Storage"
+STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
+
+AWS_REGION = 'us-east-2'
+AWS_ACCESS_KEY_ID = env("AWS_KEY")
+AWS_SECRET_ACCESS_KEY = env("AWS_SECRET")
+AWS_SESSION_TOKEN = env("AWS_BUCKET")
+AWS_S3_ADDRESSING_STYLE = 'path'
 
 django_heroku.settings(locals())
 
